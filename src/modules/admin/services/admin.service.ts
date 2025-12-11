@@ -57,8 +57,10 @@ export class AdminService {
 
     await this._isAdmin(id);
 
-    if (updateData?.email) {
-      await this._existingUser(updateData.email);
+    const user = await this.adminRepository.findUserById(id);
+
+    if (updateData?.email !== user?.email) {
+      await this._existingUser(updateData?.email || user?.email || "");
     }
 
     const updatedUser = await this.adminRepository.updateUserById(
