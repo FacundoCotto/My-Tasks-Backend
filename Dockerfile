@@ -1,15 +1,13 @@
-FROM node:20-alpine AS base 
+FROM node:20-alpine AS base
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --omit=dev
 
 COPY . .
 
-RUN npm run build
-
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["node", "src/index.js"]
