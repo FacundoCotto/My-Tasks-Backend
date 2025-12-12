@@ -4,9 +4,11 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install cross-env --omit=dev
+RUN npm install
 
 COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
 
